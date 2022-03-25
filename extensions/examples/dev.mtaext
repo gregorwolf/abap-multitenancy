@@ -1,0 +1,16 @@
+_schema-version: '3.1'
+ID: abap-saas-reference-solution-dev
+extends: abap-saas-reference-solution
+
+parameters: 
+  addon-product-name: /NAMESPC/PRODUCTX
+  appname: abap-saas-reference-solution-dev
+  provider-admin-email: administrator@example.com
+  saas-description: "ABAP based SaaS solution with an ABAP tenant per subscription"
+  saas-display-name: "SaaS Solution (Multitenancy)"
+  tenant-mode: multi
+
+modules:
+  - name: approuter
+    properties:
+      XS_APP_LOG_LEVEL: debug

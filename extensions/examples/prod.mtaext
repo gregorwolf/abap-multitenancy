@@ -1,0 +1,20 @@
+_schema-version: '3.1'
+ID: abap-saas-reference-solution-prod
+extends: abap-saas-reference-solution
+
+parameters:
+  addon-product-name: /NAMESPC/PRODUCTX
+  appname: abap-saas-reference-solution
+  provider-admin-email: administrator@example.com
+  saas-description: "ABAP based SaaS solution with an ABAP tenant per subscription"
+  saas-display-name: "SaaS Solution (Multitenancy)"
+  tenant-mode: multi
+  route-prefix: ""
+  app-domain: mydomain.com
+
+modules:
+  - name: approuter
+    parameters:
+      routes:
+        - "cis${route-prefix}.${app-domain}"
+        - "*${route-prefix}.${app-domain}"

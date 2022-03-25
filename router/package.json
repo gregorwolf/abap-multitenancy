@@ -1,0 +1,13 @@
+{
+  "name": "saas-ar",
+  "version": "1.0.0",
+  "description": "This component provides dependency management for ABAP based SaaS Solutions",
+  "dependencies": {
+    "@sap/approuter": "^8.6.1",
+    "@sap/asp-middleware": "1.0.6",
+    "@sap/xsenv": "^3.1.0"
+  },
+  "scripts": {
+    "start": "node start.js"
+  }
+}

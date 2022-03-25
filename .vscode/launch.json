@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "attach",
+        "name": "Attach to CF",
+        "protocol":"auto",
+        "port": 9229,
+        "restart": true,
+        "cwd": "${workspaceFolder}",
+        "localRoot": "${workspaceFolder}/dist",
+        "remoteRoot": "/home/vcap/app/dist",
+        "skipFiles": [
+          "<node_internals>/**",
+        ]
+      },
+      {
+        "type": "node",
+        "request": "attach",
+        "name": "Attach to Debugger",
+        "protocol":"auto",
+        "port": 9229,
+        "restart": true,
+        "cwd": "${workspaceFolder}/router",
+        "localRoot": "${workspaceFolder}/router",
+        "skipFiles": [
+          "<node_internals>/**",
+        ]
+      }
+    ]
+}
