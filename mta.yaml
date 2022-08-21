@@ -1,12 +1,11 @@
 _schema-version: "3.1"
-ID: abap-saas-reference-solution
+ID: abap-saas-csw
 version: 1.0.0
 
 parameters:
   app-domain: ${default-domain}
   route-prefix: -${appname}
   appname:
-  addon-product-name:
   provider-admin-email: 
   saas-display-name: 
   saas-description: 
@@ -14,7 +13,7 @@ parameters:
   enable-parallel-deployments: true
 
 modules:
-  - name: approuter
+  - name: abap-saas-csw-approuter
     type: javascript.nodejs
     path: router
     parameters:
@@ -22,7 +21,7 @@ modules:
       routes:
         - route: cis${route-prefix}.${app-domain}
       app-name: ${appname}
-      memory: 1024MB
+      memory: 256MB
     properties:
       TENANT_HOST_PATTERN: (.*)${route-prefix}.${app-domain}
       XS_APP_LOG_LEVEL: error
@@ -30,13 +29,13 @@ modules:
         - clientid: "*"
           identityzone: sap-provisioning
     requires:
-      - name: xsuaa
-      - name: saas-registry
-      - name: abap-solution
-      - name: application-log
+      - name: abap-saas-csw-xsuaa
+      - name: abap-saas-csw-saas-registry
+      - name: abap-saas-csw-abap-solution
+      - name: abap-saas-csw-application-log
 
 resources:
-  - name: xsuaa
+  - name: abap-saas-csw-xsuaa
     type: com.sap.xs.uaa
     requires:
       - name: abap-solution
@@ -58,7 +57,7 @@ resources:
             role-template-references:
               - $XSSERVICENAME(abap-solution).SolutionAdmin
 
-  - name: saas-registry
+  - name: abap-saas-csw-saas-registry
     type: org.cloudfoundry.managed-service
     parameters:
       service: saas-registry
@@ -73,7 +72,7 @@ resources:
         displayName: ${saas-display-name}
         description: ${saas-description}
  
-  - name: abap-solution
+  - name: abap-saas-csw-abap-solution
     type: org.cloudfoundry.managed-service
     parameters: 
       service: abap-solution
@@ -83,21 +82,15 @@ resources:
         name: ${appname}
         consumer_id_pattern: ([^-]*).*        
         plans:
-        - plan_name: default
-          addon_product_name: ${addon-product-name}
+        - plan_name: free
           size_of_runtime: 1
           size_of_persistence: 4
           tenant_mode: ${tenant-mode}
           provider_admin_email: ${provider-admin-email}
-          usage: prod 
-        #size_of_runtime: 1
-        #size_of_persistence: 4
-        #tenant_mode: ${tenant-mode}
-        #provider_admin_email: ${provider-admin-email}
-        #usage: prod          
+          usage: test 
         xs-security:
           xsappname: ${appname}
-  - name: application-log
+  - name: abap-saas-csw-application-log
     type: org.cloudfoundry.managed-service
     parameters:
       service: application-logs

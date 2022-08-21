@@ -1,0 +1,10 @@
+{
+  "name": "abap-saas-csw",
+  "version": "1.0.0",
+  "description": "Reference Solution for ABAP Solution Provider",
+  "dependencies": {},
+  "scripts": {
+    "deploy:dev": "cf deploy mta_archives/abap-saas-csw_1.0.0.mtar -e extensions/examples/dev.mtaext",
+    "undeploy": "cf undeploy abap-saas-csw --delete-service-keys --delete-services --delete-service-brokers"
+  }
+}

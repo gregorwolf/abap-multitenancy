@@ -1,10 +1,10 @@
 _schema-version: '3.1'
-ID: abap-saas-reference-solution-prod
-extends: abap-saas-reference-solution
+ID: abap-saas-csw-prod
+extends: abap-saas-csw
 
 parameters:
   addon-product-name: /NAMESPC/PRODUCTX
-  appname: abap-saas-reference-solution
+  appname: abap-saas-csw
   provider-admin-email: administrator@example.com
   saas-description: "ABAP based SaaS solution with an ABAP tenant per subscription"
   saas-display-name: "SaaS Solution (Multitenancy)"
