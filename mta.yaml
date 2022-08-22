@@ -29,19 +29,19 @@ modules:
         - clientid: "*"
           identityzone: sap-provisioning
     requires:
-      - name: abap-saas-csw-xsuaa
-      - name: abap-saas-csw-saas-registry
-      - name: abap-saas-csw-abap-solution
-      - name: abap-saas-csw-application-log
+      - name: xsuaa
+      - name: saas-registry
+      - name: abap-solution
+      - name: application-log
 
 resources:
-  - name: abap-saas-csw-xsuaa
+  - name: xsuaa
     type: com.sap.xs.uaa
     requires:
       - name: abap-solution
     parameters:
       service-plan: application
-      service-name: xsuaa
+      service-name: abap-saas-csw-xsuaa
       config:
         xsappname: ${appname}
         tenant-mode: shared
@@ -55,14 +55,14 @@ resources:
         role-collections:
           - name: ${appname}-admin
             role-template-references:
-              - $XSSERVICENAME(abap-solution).SolutionAdmin
+              - $XSSERVICENAME(abap-saas-csw-abap-solution).SolutionAdmin
 
-  - name: abap-saas-csw-saas-registry
+  - name: saas-registry
     type: org.cloudfoundry.managed-service
     parameters:
       service: saas-registry
       service-plan: application 
-      service-name: saas-registry
+      service-name: abap-saas-csw-saas-registry
       config:
         xsappname: ${appname}
         appName: ${appname}
@@ -72,27 +72,26 @@ resources:
         displayName: ${saas-display-name}
         description: ${saas-description}
  
-  - name: abap-saas-csw-abap-solution
+  - name: abap-solution
     type: org.cloudfoundry.managed-service
     parameters: 
       service: abap-solution
       service-plan: standard
-      service-name: abap-solution
+      service-name: abap-saas-csw-abap-solution
       config:
         name: ${appname}
-        consumer_id_pattern: ([^-]*).*        
-        plans:
-        - plan_name: free
-          size_of_runtime: 1
-          size_of_persistence: 4
-          tenant_mode: ${tenant-mode}
-          provider_admin_email: ${provider-admin-email}
-          usage: test 
+        consumer_id_pattern: ([^-]*).*
+        plan_name: free
+        size_of_runtime: 1
+        size_of_persistence: 2
+        tenant_mode: ${tenant-mode}
+        provider_admin_email: ${provider-admin-email}
+        usage: test 
         xs-security:
           xsappname: ${appname}
-  - name: abap-saas-csw-application-log
+  - name: application-log
     type: org.cloudfoundry.managed-service
     parameters:
       service: application-logs
       service-plan: lite
-      service-name: application-log
+      service-name: abap-saas-csw-application-log

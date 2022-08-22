@@ -5,11 +5,11 @@ extends: abap-saas-csw
 parameters: 
   appname: abap-saas-csw-dev
   provider-admin-email: gregor@computerservice-wolf.com
-  saas-description: "ABAP based SaaS solution with an ABAP tenant per subscription"
-  saas-display-name: "SaaS Solution (Multitenancy)"
+  saas-description: "CSW ABAP based SaaS solution with an ABAP tenant per subscription"
+  saas-display-name: "CSW ABAP SaaS Solution (Multitenancy)"
   tenant-mode: multi
 
 modules:
-  - name: approuter
+  - name: abap-saas-csw-approuter
     properties:
       XS_APP_LOG_LEVEL: debug
